@@ -1,6 +1,5 @@
-/*
 :- module(imageFlipV, [imageFlipV/2]).
-*/
+
 
 %Girar la imagen verticalmente
 %Input
