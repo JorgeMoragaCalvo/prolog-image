@@ -1,8 +1,7 @@
 :- module(imageToHistogram, [imageToHistogram/2]).
 
-frequency([], []).   % the frequency table for the empty list is the empty list
-frequency([X|Xs], F):-  % for a non-empty list,
-  tabulate(Xs, X:1, F).   %   we just invoke the tabulation predicate, seeding the accumulator with the initial count.
+frequency([], []).
+frequency([X|Xs], F):- tabulate(Xs, X:1, F).
                            
 
 tabulate([], C:N, [C:N]).    
