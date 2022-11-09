@@ -1,6 +1,22 @@
 :- module(imageFlipV, [imageFlipV/2]).
 
+/*
+DOMINIOS
+Height, X, Y, Bit, Depth, Width, NewX, NewY = Enteros+
+PixelIn, PixelOut, PixelsIn, PixelsOut, ImageIn, ImageOut = Listas
 
+PREDICADOS
+pixelFlipV(), pixelsFlipV(), imageFlipV().
+
+META PRINCIPAL
+imageFlipV()
+
+METAS SECUNDARIAS
+pixelFlipV(), pixelsFlipV().
+*/
+
+
+/*ESTRATEGIA DE RESOLUCION*/
 %Girar la imagen verticalmente
 %Input
 %2 * 2
@@ -18,8 +34,7 @@
 %PD(1, 1) -> (0, 1) -> X - 1
 
 
-/*-------------------------------------------------------------------------------------------------------------------------------------*/
-
+/*================================================== CODIGO ==========================================================================*/
 pixelFlipV(Width, PixelIn, PixelOut):- (pixbit(X, Y, Bit, Depth, PixelIn) -> ((X < Width - 1 -> NewX is X + 1; NewX is X - 1), 
     pixbit(NewX, Y, Bit, Depth, PixelOut)); pixrgb(X, Y, R, G, B, Depth, PixelIn) -> (X < Width - 1 -> NewX is X + 1; NewX is X - 1),
     pixrgb(NewX, Y, R, G, B, Depth, PixelOut)).
@@ -30,10 +45,9 @@ pixelsFlipV(Width, [PixelIn|PixelsIn], [PixelOut|PixelsOut]):- pixelFlipV(Width,
 
 imageFlipV(ImageIn, ImageOut):- image(Width, Height, PixelsIn, ImageIn), pixelsFlipV(Width, PixelsIn, PixelsOut),
     image(Width, Height, PixelsOut, ImageOut).
+/*====================================================================================================================================*/
 
-/*-------------------------------------------------------------------------------------------------------------------------------------*/
-
-
+/*=============================================  SCRIPTS DE PRUEBAS  =====================================================================*/
 %pixbit(0,0,1,10, P1), pixbit(0,1,0,20, P2), pixbit(1,0,1,30,P3), pixbit(1,1,1,40,P4), image(2,2, [P1,P2,P3,P4],I), imageFlipV(I, I1); true.
 %P1 = [0, 0, 1, 10],
 %P2 = [0, 1, 0, 20],
@@ -60,3 +74,4 @@ imageFlipV(ImageIn, ImageOut):- image(Width, Height, PixelsIn, ImageIn), pixelsF
 %P4 = [1, 1, 30, 30, 30, 40],
 %I = [2, 2, [[0, 0, 0, 0, 0, 10], [0, 1, 10, 10, 10, 20], [1, 0, 20, 20, 20, 30], [1, 1, 30, 30, 30, 40]]],
 %I1 = [2, 2, [[1, 0, 0, 0, 0, 10], [1, 1, 10, 10, 10, 20], [0, 0, 20, 20, 20, 30], [0, 1, 30, 30, 30, 40]]].
+/*========================================================================================================================================*/

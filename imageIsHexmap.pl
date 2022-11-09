@@ -32,9 +32,8 @@ myMaplist(Goal, [Elem1|Tail1], [Elem2|Tail2]) :-
         myMaplist(Goal, Tail1, Tail2).
 */
 
-%-----------------------------------------------------------------------------------------------------
-%-----------------------------------------------------------------------------------------------------
 
+/*========================================================================================================================================*/
 isGreaterThanZero(Pixel):- pixhex(X, Y, _, Depth, Pixel),
         (number(X), X >= 0),
         (number(Y), Y >= 0),
@@ -52,7 +51,9 @@ pixelsAreHex([]):- !.
 pixelsAreHex([Pixel|Pixels]):- pixelIsHex(Pixel), pixelsAreHex(Pixels), !.
 
 imageIsHexmap(Image):- image(_, _, Pixel, Image), pixelsAreHex(Pixel), areGreaterThanZero(Pixel), !.
+/*========================================================================================================================================*/
 
+/*=============================================  SCRIPTS DE PRUEBAS  =====================================================================*/
 %pixhex(0, 0, "rojo", 10, P1), pixhex(0, 1, "azul", 20, P2), pixhex(1, 0, "verde", 30, P3), pixhex(1, 1, "amarillo", 40, P4), image(2, 2, [P1, P2, P3, P4], I), imageIsHexmap(I).
 %True.
 
@@ -63,4 +64,4 @@ imageIsHexmap(Image):- image(_, _, Pixel, Image), pixelsAreHex(Pixel), areGreate
 %pixhex(0, 0, "rojo", 10, P1), pixhex(0, 1, "azul", 20, P2), pixhex(-1, 0, "verde", 30, P3), 
 %pixhex(1, 1, "amarillo", 40, P4), image(2, 2, [P1, P2, P3, P4], I), imageIsHexmap(I).
 %false. La coordenada X del Pixel 3 es negativa.
-
+/*========================================================================================================================================*/
