@@ -1,14 +1,30 @@
 :- module(imageInvertColorRGB, [imageInvertColorRGB/2]).
 :- use_module(imageChangePixel).
 
-invertNumber(X, N):- N is (255 - X).
+/*
+DOMINIOS
+X, Y, R, G, B, Depth, NewR, NewG, NewB = Enteros+
+PixelIn, PixelOut, PixelsIn, PixelsOut, PModificado = Listas
 
+PREDICADOS
+invertNumber/2, pixelRGB/2, invertPixelsRGB/2, imageInvertColorRGB/2.
+
+META PRINCIPAL
+imageInvertColorRGB/2.
+
+METAS SECUNDARIAS
+invertNumber/2, pixelRGB/2, invertPixelsRGB/2.
+*/
+
+
+/*================================================== CODIGO ==========================================================================*/
+invertNumber(X, N):- N is (255 - X).
 
 pixelRGB(PixelIn, PixelOut):- pixrgb(X, Y, R, G, B, Depth, PixelIn), 
     invertNumber(R, NewR),
     invertNumber(G, NewG),
     invertNumber(B, NewB),
-    pixrgb(X, Y, NewR, NewG, NewB, Depth, PixelOut).
+    pixrgb(X, Y, NewR, NewG, NewB, Depth, PixelOut), !.
 
 
 invertPixelsRGB([], []):- !.
@@ -16,17 +32,14 @@ invertPixelsRGB([PixelIn|PixelsIn], [PixelOut|PixelsOut]):- pixelRGB(PixelIn, Pi
     invertPixelsRGB(PixelsIn, PixelsOut), !.
 
 
-imageInvertColorRGB(Pixel, PModificado):- pixelRGB(Pixel, PModificado). 
+imageInvertColorRGB(Pixel, PModificado):- pixelRGB(Pixel, PModificado).
+/*====================================================================================================================================*/
 
 
-%imageInvertColorRGB(ImageIn, ImageOut):- image(Width, Height, PixelsIn, ImageIn), invertPixelsRGB(PixelsIn, PixelsOut),
-%    image(Width, Height, PixelsOut, ImageOut).
-
-
-/*=============================================  SCRIPTS DE PRUEBA  =====================================================================*/
+/*============================================= PRUEBAS Y RESULTADOS =====================================================================*/
 %Se modifica el segundo pixel.
 %pixrgb(0, 0, 10, 10, 10, 10, P1), pixrgb(0, 1, 20, 20, 20, 20, P2),pixrgb(1, 0, 30, 30, 30, 30, P3),pixrgb(1, 1, 40, 40, 40, 40, P4),
-%image(2, 2, [P1,P2,P3,P4], I), imageInvertColorRGB(P2, P2_Modificado), imageChangePixel(I, P2_Modificado, I2); true.
+%image(2, 2, [P1,P2,P3,P4], I), imageInvertColorRGB(P2, P2_Modificado), imageChangePixel(I, P2_Modificado, I2).
 %P1 = [0, 0, 10, 10, 10, 10],
 %P2 = [0, 1, 20, 20, 20, 20],
 %P3 = [1, 0, 30, 30, 30, 30],

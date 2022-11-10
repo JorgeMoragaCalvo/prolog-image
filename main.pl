@@ -11,6 +11,8 @@
 :- use_module(imageFlipV).
 :- use_module(imageInvertColorRGB).
 :- use_module(imageRotate90).
+:- use_module(imageChangePixel).
+:- use_module(imageToString).
 
 %toHex(X, N):- toHexProof1(X, N1), toHexProof2(X, N2), string_concat(N1, N2, N).
 

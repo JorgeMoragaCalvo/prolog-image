@@ -1,19 +1,18 @@
 :- module(imageIsBitmap, [imageIsBitmap/1]).
 
-
 /*
 DOMINIOS
 X, Y, Bit, Depth = Enteros+
 Pixel, Pixels, Image = Listas
 
 PREDICADOS
-isnumberPositive(), elementsArePositive(), pixelIsBitmap(), pixelsAreBitmap(), imageIsBitmap().
+isnumberPositive/1, elementsArePositive/1, pixelIsBitmap/1, pixelsAreBitmap/1, imageIsBitmap/1.
 
 META PRINCIPAL
-imageIsBitmap().
+imageIsBitmap/1.
 
 METAS SECUNDARIAS
-isnumberPositive(), elementsArePositive(), pixelIsBitmap(), pixelsAreBitmap().
+isnumberPositive/1, elementsArePositive/1, pixelIsBitmap/1, pixelsAreBitmap/1.
 */
 
 
@@ -36,7 +35,7 @@ imageIsBitmap(Image):- image(_, _, Pixels, Image), pixelsAreBitmap(Pixels),
 /*========================================================================================================================================*/
 
 
-/*=============================================  SCRIPTS DE PRUEBAS  =====================================================================*/
+/*============================================= PRUEBAS Y RESULTADOS =====================================================================*/
 %pixbit(0, 0, 0, 10, P1), pixbit(0, 1, 1, 20, P2), pixbit(1, 0, 1, 40, P3), pixbit(1, 1, 0, 40, P4), image(2, 2, [P1, P2, P3, P4], I),
 %imageIsBitmap(I).
 %True.

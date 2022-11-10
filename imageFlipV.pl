@@ -6,13 +6,13 @@ Height, X, Y, Bit, Depth, Width, NewX, NewY = Enteros+
 PixelIn, PixelOut, PixelsIn, PixelsOut, ImageIn, ImageOut = Listas
 
 PREDICADOS
-pixelFlipV(), pixelsFlipV(), imageFlipV().
+pixelFlipV/3, pixelsFlipV/3, imageFlipV/2.
 
 META PRINCIPAL
-imageFlipV()
+imageFlipV/2
 
 METAS SECUNDARIAS
-pixelFlipV(), pixelsFlipV().
+pixelFlipV/3, pixelsFlipV/3.
 */
 
 
@@ -24,7 +24,7 @@ pixelFlipV(), pixelsFlipV().
 %PC(1, 0)  PD(1, 1)
 
 %Output
-%2 * 2
+%2 * 2 <- solo se modifica la coordenada X de cada par.
 %PC(0, 0)  PD(0, 1)
 %PA(1, 0)  PB(1, 1)
 
@@ -47,7 +47,7 @@ imageFlipV(ImageIn, ImageOut):- image(Width, Height, PixelsIn, ImageIn), pixelsF
     image(Width, Height, PixelsOut, ImageOut).
 /*====================================================================================================================================*/
 
-/*=============================================  SCRIPTS DE PRUEBAS  =====================================================================*/
+/*============================================= PRUEBAS Y RESULTADOS =====================================================================*/
 %pixbit(0,0,1,10, P1), pixbit(0,1,0,20, P2), pixbit(1,0,1,30,P3), pixbit(1,1,1,40,P4), image(2,2, [P1,P2,P3,P4],I), imageFlipV(I, I1); true.
 %P1 = [0, 0, 1, 10],
 %P2 = [0, 1, 0, 20],

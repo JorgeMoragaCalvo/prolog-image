@@ -1,15 +1,32 @@
 :- module(imageChangePixel, [imageChangePixel/3]).
 
+/*
+DOMINIOS
+H, T, N, X, Y, E = Enteros+
+L, Xs, Ys, I, I2, Pmodificado, Pixels = Listas
 
+PREDICADOS
+car/2, cdr/2, cadr/2, caddr/2, getThirdElement/2, indexOf/3, insertElement/4, imageChangePixel/3
+
+
+META PRINCIPAL
+imageChangePixel/3
+
+METAS SECUNDARIAS
+car/2, cdr/2, cadr/2, caddr/2, getThirdElement/2, indexOf/3, insertElement/4.
+*/
+
+/*================ Capa Selectora==========================*/
 car([H|_], H).
 cdr([_|T], T).
 cadr(L, N):- cdr(L, L1), car(L1, N).
 caddr(L, N):- cdr(L, L1), cdr(L1, L2), car(L2, N).
 
-
 getThirdElement(P, E):- caddr(P, E).
+/*=========================================================*/
 
 
+/*================================================== CODIGO ==========================================================================*/
 %Busca que las coordenadas coincidan devolviendo la posicion de la coincidencia.
 indexOf([[X, Y|_]|_], [X, Y|_], 0):- !.
 indexOf([_|T], [X, Y|_], N):- indexOf(T, [X, Y|_], N1), N is N1 + 1, !.
@@ -22,9 +39,10 @@ insertElement(E, N, [X|Xs], [X|Ys] ):- N1 is N - 1, insertElement(E, N1, Xs, Ys)
 
 imageChangePixel(I, PModificado, I2):- getThirdElement(I, Pixels), indexOf(Pixels, PModificado, N),
     insertElement(PModificado, N, Pixels, I3), insertElement(I3, 2, I, I2), !.
+/*====================================================================================================================================*/
 
 
-/*---------------------------------------------------------------------------------------------------------------------------------------------*/
+/*============================================= PRUEBAS Y RESULTADOS =====================================================================*/
 %Modifica el pixel 2 de una imagen pixrgb
 %pixrgb(0, 0, 10, 10, 10, 10, P1), pixrgb(0, 1, 20, 20, 20, 20, P2),pixrgb(1, 0, 30, 30, 30, 30, P3),pixrgb(1, 1, 40, 40, 40, 40, P4),
 %image(2, 2, [P1,P2,P3,P4], I), pixrgb(0, 1, 54, 54, 54, 20, P2_Modificado), imageChangePixel(I, P2_Modificado, I2); true.
@@ -59,4 +77,4 @@ imageChangePixel(I, PModificado, I2):- getThirdElement(I, Pixels), indexOf(Pixel
 %I = [2, 2, [[0, 0, "FFFFFF", 10], [0, 1, "E1E1E1", 20], [1, 0, "FFFFFF", 30], [1, 1, 1, "FFFFFF"]]],
 %P3_Modificado = [1, 0, "C8C8C8", 50],
 %I2 = [2, 2, [[0, 0, "FFFFFF", 10], [0, 1, "E1E1E1", 20], [1, 0, "C8C8C8", 50], [1, 1, 1, "FFFFFF"]]].
-
+/*========================================================================================================================================*/

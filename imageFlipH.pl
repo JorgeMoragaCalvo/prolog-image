@@ -6,13 +6,13 @@ Height, X, Y, Bit, Depth, Width, NewX, NewY = Enteros+
 PixelIn, PixelOut, PixelsIn, PixelsOut, ImageIn, ImageOut = Listas
 
 PREDICADOS
-pixelFlipH(), pixelsFlipH(), imageFlipH().
+pixelFlipH/3, pixelsFlipH/3, imageFlipH/2.
 
 META PRINCIPAL
-imageFlipH()
+imageFlipH/2
 
 METAS SECUNDARIAS
-pixelFlipH(), pixelsFlipH().
+pixelFlipH/3, pixelsFlipH/3.
 */
 
 
@@ -23,7 +23,7 @@ pixelFlipH(), pixelsFlipH().
 %PA(0, 0)  PB(0, 1)
 %PC(1, 0)  PD(1, 1)
 
-%Output
+%Output <- solo se modifica la coordenada Y de cada par.
 %2 * 2
 %PB(0, 0)  PA(0, 1)
 %PD(1, 0)  PC(1, 1)
@@ -48,7 +48,7 @@ imageFlipH(ImageIn, ImageOut):- image(Width, Height, PixelsIn, ImageIn), pixelsF
     image(Width, Height, PixelsOut, ImageOut).
 /*====================================================================================================================================*/
 
-/*=============================================  SCRIPTS DE PRUEBAS  =====================================================================*/
+/*============================================= PRUEBAS Y RESULTADOS =====================================================================*/
 %pixbit(0,0,1,10, P1), pixbit(0,1,0,20, P2), pixbit(1,0,1,30,P3), pixbit(1,1,1,40,P4), image(2,2, [P1,P2,P3,P4],I), imageFlipH(I, I1).
 %P1 = [0, 0, 1, 10],
 %P2 = [0, 1, 0, 20],
@@ -58,7 +58,7 @@ imageFlipH(ImageIn, ImageOut):- image(Width, Height, PixelsIn, ImageIn), pixelsF
 %I1 = [2, 2, [[0, 1, 1, 10], [0, 0, 0, 20], [1, 1, 1, 30], [1, 0, 1, 40]]].
 
 
-%pixhex(0, 0, "#FFFFFF", 10, P1), pixhex(0, 1, "#FFFFFF", 20, P2), pixhex(1, 0, "#FFFFFF", 30, P3), pixhex(1, 1, "#FFFFFF", 40, P4), 
+%pixhex(0, 0, "#FFFFFF", 10, P1), pixhex(0, 1, "#FFFFFF", 20, P2), pixhex(1, 0, "#FFFFFF", 30, P3), pixhex(1, 1, "#FFFFFF", 40, P4),
 %image(2, 2, [P1, P2, P3, P4], I), imageFlipH(I, I1); true.
 %P1 = [0, 0, "#FFFFFF", 10],
 %P2 = [0, 1, "#FFFFFF", 20],
@@ -68,7 +68,8 @@ imageFlipH(ImageIn, ImageOut):- image(Width, Height, PixelsIn, ImageIn), pixelsF
 %I1 = [2, 2, [[0, 1, "#FFFFFF", 10], [0, 0, "#FFFFFF", 20], [1, 1, "#FFFFFF", 30], [1, 0, "#FFFFFF", 40]]].
 
 
-%pixrgb(0, 0, 210, 210, 210, 10, P1), pixrgb(0, 1, 220, 220, 220, 20, P2), pixrgb(1, 0, 230, 230, 230, 30, P3), pixrgb(1, 1, 240, 240, 240, 40, P4), image(2, 2, [P1, P2, P3, P4], I), imageFlipH(I, I1).
+%pixrgb(0, 0, 210, 210, 210, 10, P1), pixrgb(0, 1, 220, 220, 220, 20, P2), pixrgb(1, 0, 230, 230, 230, 30, P3),
+%pixrgb(1, 1, 240, 240, 240, 40, P4), image(2, 2, [P1, P2, P3, P4], I), imageFlipH(I, I1).
 %P1 = [0, 0, 210, 210, 210, 10],
 %P2 = [0, 1, 220, 220, 220, 20],
 %P3 = [1, 0, 230, 230, 230, 30],
