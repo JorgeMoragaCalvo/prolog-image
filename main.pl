@@ -18,7 +18,3 @@
 :- use_module(imageInvertColorRGB).
 :- use_module(imageToString).
 :- use_module(imageDepthLayers).
-
-%toHex(X, N):- toHexProof1(X, N1), toHexProof2(X, N2), string_concat(N1, N2, N).
-
-whatIs(I):- (imageIsBitmap(I) -> display("Is pixbit"); (imageIsHexmap(I) -> display("Is pixhex"); display("error"))).
