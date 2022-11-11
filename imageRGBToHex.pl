@@ -1,7 +1,27 @@
 :- module(imageRGBToHex, [imageRGBToHex/2]).
 
+/*
+DOMINIOS
+N = String
+R, G, B, X, Depth = Enteros+
+PixelIn, PixelOut, PixelsOut, ImageIn, ImageOut = Listas
 
-/*PROCEDIMIENTO PARA CONVERTIR NUMERO N A HEXADECIMAL Y CONVERTIR NUMERO A STRING*/
+HECHOS
+hexNumbers/2.
+
+REGLAS
+toHex1/2, toHex2/2, toHexProof1/2, toHexProof2/2, toHex/2, hexNumber/2, number_string/2, toHexAux/4.
+toHexPixel/2, toHexPixels/2, imageRGBToHex/2.
+
+META PRINCIPAL
+imageRGBToHex/2.
+
+METAS SECUNDARIAS
+toHex1/2, toHex2/2, toHexProof1/2, toHexProof2/2, toHex/2, hexNumber/2, number_string/2, toHexAux/4, toHexPixel/2, toHexPixels/2.
+*/
+
+
+/*================================================== CODIGO ==========================================================================*/
 toHex1(X, N):- N is X rem 16.
 
 toHex2(X, N):- A is X div 16, N is A rem 16.
@@ -41,9 +61,9 @@ imageRGBToHex(ImageIn, ImageOut):- image(Width, Height, PixelsIn, ImageIn), toHe
 /*========================================================================================================================================*/
 
 
-/*=============================================  SCRIPTS DE PRUEBAS  =====================================================================*/
-%pixrgb(0, 0, 220, 220, 220, 10, P1), pixrgb(0, 1, 230, 230, 230, 20, P2), pixrgb(1, 0, 240, 240, 240, 30, P3), pixrgb(1, 1, 250, 250, 250, 40, P4),
-%image(2, 2, [P1, P2, P3, P4], I), imageRGBToHex(I, I1); true.
+/*============================================= PRUEBAS Y RESULTADOS =====================================================================*/
+%pixrgb(0, 0, 220, 220, 220, 10, P1), pixrgb(0, 1, 230, 230, 230, 20, P2), pixrgb(1, 0, 240, 240, 240, 30, P3), 
+%pixrgb(1, 1, 250, 250, 250, 40, P4), image(2, 2, [P1, P2, P3, P4], I), imageRGBToHex(I, I1); true.
 %P1 = [0, 0, 220, 220, 220, 10],
 %P2 = [0, 1, 230, 230, 230, 20],
 %P3 = [1, 0, 240, 240, 240, 30],

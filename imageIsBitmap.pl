@@ -5,7 +5,7 @@ DOMINIOS
 X, Y, Bit, Depth = Enteros+
 Pixel, Pixels, Image = Listas
 
-PREDICADOS
+REGLAS
 isnumberPositive/1, elementsArePositive/1, pixelIsBitmap/1, pixelsAreBitmap/1, imageIsBitmap/1.
 
 META PRINCIPAL

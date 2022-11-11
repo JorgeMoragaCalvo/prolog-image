@@ -5,7 +5,7 @@ DOMINIOS
 Height, X, Y, Bit, Depth, Width, NewX, NewY = Enteros+
 PixelIn, PixelOut, PixelsIn, PixelsOut, ImageIn, ImageOut = Listas
 
-PREDICADOS
+REGLAS
 pixelFlipV/3, pixelsFlipV/3, imageFlipV/2.
 
 META PRINCIPAL
@@ -25,8 +25,8 @@ pixelFlipV/3, pixelsFlipV/3.
 
 %Output
 %2 * 2 <- solo se modifica la coordenada X de cada par.
-%PC(0, 0)  PD(0, 1)
-%PA(1, 0)  PB(1, 1)
+%PC(1, 0)  PD(1, 1)
+%PA(0, 0)  PB(0, 1)
 
 %PA(0, 0) -> (1, 0) -> X - 1
 %PB(0, 1) -> (1, 1) -> X - 1

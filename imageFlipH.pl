@@ -5,7 +5,7 @@ DOMINIOS
 Height, X, Y, Bit, Depth, Width, NewX, NewY = Enteros+
 PixelIn, PixelOut, PixelsIn, PixelsOut, ImageIn, ImageOut = Listas
 
-PREDICADOS
+REGLAS
 pixelFlipH/3, pixelsFlipH/3, imageFlipH/2.
 
 META PRINCIPAL
@@ -49,7 +49,8 @@ imageFlipH(ImageIn, ImageOut):- image(Width, Height, PixelsIn, ImageIn), pixelsF
 /*====================================================================================================================================*/
 
 /*============================================= PRUEBAS Y RESULTADOS =====================================================================*/
-%pixbit(0,0,1,10, P1), pixbit(0,1,0,20, P2), pixbit(1,0,1,30,P3), pixbit(1,1,1,40,P4), image(2,2, [P1,P2,P3,P4],I), imageFlipH(I, I1).
+%pixbit(0, 0, 1, 10, P1), pixbit(0, 1, 0, 20, P2), pixbit(1, 0, 1, 30, P3), pixbit(1, 1, 1, 40, P4), image(2, 2, [P1, P2, P3, P4], I), 
+%imageFlipH(I, I1).
 %P1 = [0, 0, 1, 10],
 %P2 = [0, 1, 0, 20],
 %P3 = [1, 0, 1, 30],

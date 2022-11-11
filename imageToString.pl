@@ -1,5 +1,6 @@
 :- module(imageToString, [imageToString/2]).
 
+/*======================================= CODIGOS DE PRUEBA =====================================================================*/
 pixel(A, B, C, D, [A, B, C, D]).
 
 pixeles(P, [P]).
@@ -81,6 +82,11 @@ split_list(N, [H|T], [[H|Y], Z]):- N1 is N-1, split_list(N1, T, [Y, Z]).
 %00      01
 %10      11
 
+%atom_concat(R1, " ", R2), atom_concat(G1, " ", G2), atom_concat(B1, "", B2), string_concat(R2, G2, RG), 
+%string_concat(RG, B2, RGB),
+/*========================================================================================================================================*/
+
+
 /*
 DOMINIOS
 Width, Height, X, Y, Value, R, G, B, 
@@ -105,15 +111,15 @@ pixelToString/6, rgbToString/8, pixelsToString/4.
 %pixelToString(Width, Height, X, Y, Value, Out):- 
 %  (X < Width, Y < Height - 1 -> atom_concat(Value, "\t", Out); atom_concat(Value, "\n", Out)).
 
-
+%Compuebo si Value es un numero => pixbit. Si Value no es numero => pixhex.
 pixelToString(Width, Height, X, Y, Value, Out):- (number(Value) -> (number_string(Value, Str) -> 
   (X < Width, Y < Height - 1 -> atom_concat(Str, "\t", Out); atom_concat(Str, "\n", Out)));
   (X < Width, Y < Height - 1 -> atom_concat(Value, "\t", Out); atom_concat(Value, "\n", Out))).
 
 
 rgbToString(Width, Height, X, Y, R, G, B, Out):- number_string(R, R1), number_string(G, G1), number_string(B, B1),
-  atom_concat(R1, " ", R2), atom_concat(G1, " ", G2), atom_concat(B1, "", B2), string_concat(R2, G2, RG), 
-  string_concat(RG, B2, RGB), (X < Width, Y < Height - 1 -> atom_concat(RGB, "\t", Out); atom_concat(RGB, "\n", Out)).
+  atomic_list_concat(['[', R1, ' ', G1, ' ', B1, ']'], RGB),   
+  (X < Width, Y < Height - 1 -> atom_concat(RGB, "\t", Out); atom_concat(RGB, "\n", Out)).
 
 
 pixelsToString(_, _, [], []).
@@ -121,10 +127,6 @@ pixelsToString(Width, Height, [Pixel|Pixels], [PixelStr|PixelsStr]):- (pixbit(X,
   (pixelToString(Width, Height, X, Y, Bit, PixelStr), pixelsToString(Width, Height, Pixels, PixelsStr)); 
   pixrgb(X, Y, R, G, B, _, Pixel), rgbToString(Width, Height, X, Y, R, G, B, PixelStr), pixelsToString(Width, Height, Pixels, PixelsStr)).
 
-
-%pixelsToString(_, _, [], []).
-%pixelsToString(Width, Height, [Pixel|Pixels], [PixelStr|PixelsStr]):- pixbit(X, Y, Bit, _, Pixel),
-%  pixelToString(Width, Height, X, Y, Bit, PixelStr), pixelsToString(Width, Height, Pixels, PixelsStr).
 
 imageToString(Image, ImageStr):- image(Width, Height, Pixels, Image),
   pixelsToString(Width, Height, Pixels, PixelsStr), atomic_list_concat(PixelsStr, ImageStr).
@@ -158,12 +160,12 @@ imageToString(Image, ImageStr):- image(Width, Height, Pixels, Image),
 
 %pixrgb(0, 0, 200, 200, 200, 10, P1), pixrgb(0, 1, 210, 210, 210, 20, P2), pixrgb(1, 0, 220, 220, 220, 30, P3), 
 %pixrgb(1, 1, 230, 230, 230, 40, P4), image(2, 2, [P1, P2, P3, P4], I), imageToString(I, IString), writef(IString).
-%200 200 200     210 210 210
-%220 220 220     230 230 230
+%[200 200 200]   [210 210 210]
+%[220 220 220]   [230 230 230]
 %P1 = [0, 0, 200, 200, 200, 10],
 %P2 = [0, 1, 210, 210, 210, 20],
 %P3 = [1, 0, 220, 220, 220, 30],
 %P4 = [1, 1, 230, 230, 230, 40],
 %I = [2, 2, [[0, 0, 200, 200, 200|...], [0, 1, 210, 210|...], [1, 0, 220|...], [1, 1|...]]],
-%IString = '200 200 200\t210 210 210\n220 220 220\t230 230 230\n'.
+%IString = '[200 200 200]\t[210 210 210]\n[220 220 220]\t[230 230 230]\n'.
 /*=======================================================================================================================================*/

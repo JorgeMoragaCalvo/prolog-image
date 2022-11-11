@@ -1,6 +1,51 @@
-:- module(imageRotate90, [pixelRotate90X/3, pixelRotate90Y/3, imageRotate90/2]).
+:- module(imageRotate90, [imageRotate90/2]).
 :- use_module(imageFlipV).
 
+%pixelRotate90X/3, pixelRotate90Y/3,
+
+/*
+DOMINIOS
+PixelIn, PixelOut, PixelsIn, PixelsOut, ImageIn, ImageOut = Listas
+
+REGLAS
+changePosXPosY/2, changeAllPosXPosY/2, imageChange/2, imageRotate90/2.
+
+META PRINCIPAL
+imageRotate90/2.
+
+METAS SECUNDARIAS
+changePosXPosY/2, changeAllPosXPosY/2, imageChange/2.
+*/
+
+
+/*ESTRATEGIA DE RESOLUCION*/
+%Rotar la imagen 90 grados a la derecha
+%Input
+%2 * 2
+%PA(0, 0)  PB(0, 1)
+%PC(1, 0)  PD(1, 1)
+
+%Output
+%2 * 2
+%PB(1, 0)  PA(0, 0)
+%PD(1, 1)  PC(0, 1)
+
+%Paso 1: Intercambiar las coordenadas.
+%Input
+%2 * 2
+%PA(0, 0)  PB(0, 1)
+%PC(1, 0)  PD(1, 1)
+
+%Output
+%2 * 2
+%PB(0, 0)  PA(1, 0)
+%PD(0, 1)  PC(1, 1)
+
+%Paso 2: una vez intercambiadas las coordenadas, aplicar funcion imageFlipV.
+
+/*===============================*/
+
+/*======================================= CODIGOS DE PRUEBA =====================================================================*/
 pixelRotate90(Width, Height, PixelIn, PixelOut):- pixbit(X, Y, Bit, Depth, PixelIn), 
     %((X == Y, X < Width - 1) -> NewX is X + 1; NewX is X - 1), pixbit(NewX, Y, Bit, Depth, PixelOut).
     %((X =\= Y, Y < Height - 1) -> NewY is Y + 1; NewY is Y - 1), pixbit(X, NewY, Bit,Depth, PixelOut).
@@ -14,31 +59,16 @@ pixelRotate90X(Width, PixelIn, PixelOut):- pixbit(X, Y, Bit, Depth, PixelIn),
 pixelRotate90Y(Height, PixelIn, PixelOut):- pixbit(X, Y, Bit, Depth, PixelIn),
     ((X =\= Y, Y < Height - 1) -> NewY is Y + 1; NewY is Y - 1), pixbit(X, NewY, Bit,Depth, PixelOut).
 
-%pixbit(0,0,1,10,P1), pixelRotate90(2, 2, P1, P2).
-%P1 = [0, 0, 1, 10],
-%P2 = [1, 0, 1, 10].
-
-%pixbit(1,1,1,10,P1), pixelRotate90(2, 2, P1, P2).
-%P1 = [1, 1, 1, 10],
-%P2 = [0, 1, 1, 10].
-
-%pixbit(0,1,1,20,PA), pixelRotate90(2,2,PA, PB).
-%PA = [0, 1, 1, 20],
-%PB = [0, 0, 1, 20].
-
-%pixbit(1,0,1,20,PA), pixelRotate90(2,2,PA, PB).
-%PA = [1, 0, 1, 20],
-%PB = [1, 1, 1, 20].
-
 pixelsRotate90(_, _, [], []):- !.
 pixelsRotate90(Width, Height, [PixelIn|PixelsIn], [PixelOut|PixelsOut]):- pixelRotate90(Width, Height, PixelIn, PixelOut),
     pixelsRotate90(Width, Height, PixelsIn, PixelsOut).
 
 %imageRotate90(ImageIn, ImageOut):- image(Width, Height, PixelsIn, ImageIn), pixelsRotate90(Width, Height, PixelsIn, PixelsOut),
 %    image(Width, Height, PixelsOut, ImageOut).
+/*========================================================================================================================================*/
 
-/*--------------------------------------------------------------------------------------------------------------*/
 
+/*================================================== CODIGO ==========================================================================*/
 changePosXPosY(PixelIn, PixelOut):- (pixbit(X, Y, Bit, Depth, PixelIn) -> pixbit(Y, X, Bit, Depth, PixelOut);
     (pixrgb(X, Y, R, G, B, Depth, PixelIn) -> pixrgb(Y, X, R, G, B, Depth, PixelOut); !)).
 
@@ -50,11 +80,10 @@ imageChange(ImageIn, ImageOut):- image(Width, Height, PixelsIn, ImageIn), change
     image(Width, Height, PixelsOut, ImageOut), !.
 
 imageRotate90(ImageIn, ImageOut):- imageChange(ImageIn, Image), imageFlipV(Image, ImageOut).
+/*========================================================================================================================================*/
 
-/*--------------------------------------------------------------------------------------------------------------*/
 
-
-/*=============================================  SCRIPTS DE PRUEBA  =====================================================================*/
+/*============================================= PRUEBAS Y RESULTADOS =====================================================================*/
 %pixbit(0, 0, 0, 10, P1), pixbit(0, 1, 0, 20, P2), pixbit(1, 0, 1, 30, P3), pixbit(1, 1, 1, 40, P4), image(2, 2,[P1, P2, P3, P4], I), 
 %imageRotate90(I, I1).
 %P1 = [0, 0, 0, 10],

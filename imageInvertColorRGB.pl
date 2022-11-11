@@ -6,7 +6,7 @@ DOMINIOS
 X, Y, R, G, B, Depth, NewR, NewG, NewB = Enteros+
 PixelIn, PixelOut, PixelsIn, PixelsOut, PModificado = Listas
 
-PREDICADOS
+REGLAS
 invertNumber/2, pixelRGB/2, invertPixelsRGB/2, imageInvertColorRGB/2.
 
 META PRINCIPAL
