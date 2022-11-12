@@ -28,9 +28,9 @@ pixelFlipV/3, pixelsFlipV/3.
 %PC(1, 0)  PD(1, 1)
 %PA(0, 0)  PB(0, 1)
 
-%PA(0, 0) -> (1, 0) -> X - 1
-%PB(0, 1) -> (1, 1) -> X - 1
-%PC(1, 0) -> (0, 0) -> X + 1
+%PA(0, 0) -> (1, 0) -> X + 1
+%PB(0, 1) -> (1, 1) -> X + 1
+%PC(1, 0) -> (0, 0) -> X - 1
 %PD(1, 1) -> (0, 1) -> X - 1
 
 
@@ -66,8 +66,8 @@ imageFlipV(ImageIn, ImageOut):- image(Width, Height, PixelsIn, ImageIn), pixelsF
 %I1 = [2, 2, [[1, 0, "#FFFFFF", 10], [1, 1, "#FFFFFF", 20], [0, 0, "#FFFFFF", 30], [0, 1, "#FFFFFF", 40]]].
 
 
-%pixrgb(0,0,0,0,0,10,P1), pixrgb(0,1,10,10,10,20,P2),  pixrgb(1,0,20,20,20,30,P3), pixrgb(1,1,30,30,30,40,P4),image(2,2,[P1,P2,P3,P4], I), 
-%imageFlipV(I, I1); true.
+%pixrgb(0, 0, 0, 0, 0, 10, P1), pixrgb(0, 1, 10, 10, 10, 20, P2),  pixrgb(1, 0, 20, 20, 20, 30, P3), pixrgb(1, 1, 30, 30, 30, 40, P4),
+%image(2, 2,[P1, P2, P3, P4], I), imageFlipV(I, I1); true.
 %P1 = [0, 0, 0, 0, 0, 10],
 %P2 = [0, 1, 10, 10, 10, 20],
 %P3 = [1, 0, 20, 20, 20, 30],

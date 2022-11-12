@@ -77,14 +77,15 @@ imageIsHexmap(Image):- image(_, _, Pixel, Image), pixelsAreHex(Pixel), areGreate
 
 
 /*============================================= PRUEBAS Y RESULTADOS =====================================================================*/
-%pixhex(0, 0, "rojo", 10, P1), pixhex(0, 1, "azul", 20, P2), pixhex(1, 0, "verde", 30, P3), pixhex(1, 1, "amarillo", 40, P4), image(2, 2, [P1, P2, P3, P4], I), imageIsHexmap(I).
+%pixhex(0, 0, "FAFAFA", 10, P1), pixhex(0, 1, "FFFFFF", 20, P2), pixhex(1, 0, "C6C6C6", 30, P3), pixhex(1, 1, "FFFFFF", 40, P4), 
+%image(2, 2, [P1, P2, P3, P4], I), imageIsHexmap(I).
 %True.
 
-%pixhex(0, 0, "rojo", 10, P1), pixhex(0, 1, "azul", 20, P2), pixhex(1, 0, verde, 30, P3), 
-%pixhex(1, 1, "amarillo", 40, P4), image(2, 2, [P1, P2, P3, P4], I), imageIsHexmap(I).
+%pixhex(0, 0, "FAFAFA", 10, P1), pixhex(0, 1, "FAFAFA", 20, P2), pixhex(1, 0, 1, 30, P3), 
+%pixhex(1, 1, "FAFAFA", 40, P4), image(2, 2, [P1, P2, P3, P4], I), imageIsHexmap(I).
 %false. El color del Pixel 3 no es un string.
 
-%pixhex(0, 0, "rojo", 10, P1), pixhex(0, 1, "azul", 20, P2), pixhex(-1, 0, "verde", 30, P3), 
-%pixhex(1, 1, "amarillo", 40, P4), image(2, 2, [P1, P2, P3, P4], I), imageIsHexmap(I).
+%pixhex(0, 0, "FAFAFA", 10, P1), pixhex(0, 1, "C6C6C6", 20, P2), pixhex(-1, 0, "C6C6C6", 30, P3), 
+%pixhex(1, 1, "FAFAFA", 40, P4), image(2, 2, [P1, P2, P3, P4], I), imageIsHexmap(I).
 %false. La coordenada X del Pixel 3 es negativa.
 /*========================================================================================================================================*/
